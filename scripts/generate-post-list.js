@@ -49,7 +49,7 @@ function generatePostList() {
         thumbnail: data.thumbnail || ''
       };
     })
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+    .sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
 
   fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true });
 
