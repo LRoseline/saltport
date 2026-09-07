@@ -2,9 +2,26 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const POSTS_DIR = path.join(process.cwd(), 'wiki/posts/news/');
+const POSTS_DIR = path.join(process.cwd(), 'wiki/posts/news');
+const OUTPUT_FILE = path.join(process.cwd(), 'public', 'posts.json');
 
-const OUTPUT_FILE = path.join(process.cwd(), 'public', 'posts.json'); // 결과 저장 위치
+function getMarkdownFiles(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+  let files = [];
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      files = files.concat(getMarkdownFiles(fullPath));
+    } else if (entry.isFile() && entry.name.endsWith('.md')) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
 
 function generatePostList() {
   if (!fs.existsSync(POSTS_DIR)) {
@@ -12,27 +29,35 @@ function generatePostList() {
     return;
   }
 
-  const files = fs.readdirSync(POSTS_DIR);
+  const files = getMarkdownFiles(POSTS_DIR);
+
   const posts = files
-    .filter(file => file.endsWith('.md'))
-    .map(file => {
-      const filePath = path.join(POSTS_DIR, file);
+    .map(filePath => {
       const fileContent = fs.readFileSync(filePath, 'utf-8');
-      
-      const { data } = matter(fileContent); 
-      
+      const { data } = matter(fileContent);
+
+      const relativePath = path
+        .relative(process.cwd(), filePath)
+        .replace(/\\/g, '/');
+
       return {
-        slug: file.replace('.md', ''),
+        slug: path.basename(filePath, '.md'),
+        path: relativePath,
         title: data.title || 'Title',
         date: data.date || '',
         excerpt: data.excerpt || '',
         thumbnail: data.thumbnail || ''
       };
     })
-
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(posts, null, 2));
+  fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true });
+
+  fs.writeFileSync(
+    OUTPUT_FILE,
+    JSON.stringify(posts, null, 2)
+  );
+
   console.log(`Created : ${posts.length}!`);
 }
 
