@@ -1,6 +1,7 @@
 ---
 title: "티켓 예매 안내"
 date: 2025-09-25 00:00:00 +09:00
+thumbnail: /wiki/shared/notice.png
 ---
 
 ![공지사항 배너](/wiki/shared/notice.png)

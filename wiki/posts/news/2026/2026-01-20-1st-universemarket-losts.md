@@ -1,6 +1,7 @@
 ---
 title: "제1회 유니버스 마켓 분실물 공지"
 date: 2026-01-20 00:00:00 +09:00
+thumbnail: /wiki/shared/notice.png
 ---
 
 ![공지사항 배너](/wiki/shared/notice.png)\
