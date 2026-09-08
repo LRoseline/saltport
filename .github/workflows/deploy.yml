@@ -27,6 +27,25 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Fetch previous post data
+        run: |
+          git fetch origin gh-pages:gh-pages || true
+
+          mkdir -p public/posts
+
+          if git show gh-pages:posts/manifest.json > public/posts/manifest.json 2>/dev/null; then
+            echo "Previous manifest found."
+          else
+            echo "No previous manifest."
+            echo "{}" > public/posts/manifest.json
+          fi
+
+          for file in $(git ls-tree -r --name-only gh-pages posts/ 2>/dev/null | grep '^posts/.*\.json$' || true); do
+            if [ "$file" != "posts/manifest.json" ]; then
+              git show "gh-pages:$file" > "public/$file"
+            fi
+          done
+
       - name: Generate post list
         run: node scripts/generate-post-list.js
 
