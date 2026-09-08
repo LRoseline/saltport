@@ -3,8 +3,8 @@ title: "제1회 유니버스 마켓 분실물 공지"
 date: 2026-01-20 00:00:00 +09:00
 ---
 
-![공지사항 배너](/wiki/shared/notice.png)
-![장갑 분실물](/wiki/common/20260120_losts_1.png)
+![공지사항 배너](/wiki/shared/notice.png)\
+![장갑 분실물](/wiki/common/20260120_losts_1.png)\
 ![기타 분실물](/wiki/common/20260120_losts_2.png)
 
 ※ 해당 공지 이전의 분실물 문의 및 컴플레인의 경우에는 발송 중 혹은 발송 처리가 완료되었으며, 이미지는 별도로 게시되지 않았습니다.
