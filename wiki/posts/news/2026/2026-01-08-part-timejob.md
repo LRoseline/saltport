@@ -1,5 +1,5 @@
 ---
-title: "유니버스 마켓 회지 도서관 기부 공지"
+title: "유니버스 마켓 스태프 모집 공고"
 date: 2026-01-08 00:00:00 +09:00
 thumbnail: /wiki/shared/notice.png
 ---
