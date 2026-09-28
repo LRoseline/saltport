@@ -1,6 +1,6 @@
 ---
 title: "제1회 유니버스 마켓 행사 소개"
-date: 2026-01-13 00:00:00 +09:00
+date: 2025-10-07 00:00:00 +09:00
 thumbnail: /wiki/shared/notice.png
 ---
 
